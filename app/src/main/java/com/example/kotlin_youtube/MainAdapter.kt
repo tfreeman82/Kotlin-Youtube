@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.video_row.view.*
 
-class MainAdapter: RecyclerView.Adapter<YoutubeViewHolder>() {
+class MainAdapter(val homeFeed: HomeFeed): RecyclerView.Adapter<YoutubeViewHolder>() {
     val videoTitles = listOf<String>("First title", "Second", "Third")
+
     override fun getItemCount(): Int {
-        return videoTitles.size
+        return homeFeed.videos.count()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YoutubeViewHolder {
@@ -20,7 +21,8 @@ class MainAdapter: RecyclerView.Adapter<YoutubeViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: YoutubeViewHolder, position: Int) {
-        holder.view.textView_vido_title?.text= videoTitles.get(position)
+        val video = homeFeed.videos.get(position)
+        holder.view.textView_vido_title?.text= video.name
     }
 }
 
